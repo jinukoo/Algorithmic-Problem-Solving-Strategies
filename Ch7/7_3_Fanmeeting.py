@@ -49,7 +49,7 @@ def karatsuba(a, b):
     a1 = a[half:an]
     b0 = b[0:min(bn, half)]
     b1 = b[min(bn, half):bn]
-
+    
     # z2 = a1 * b1
     z2 = karatsuba(a1, b1)
     # z0 = a0 * b0
@@ -73,37 +73,21 @@ def karatsuba(a, b):
 # input test cases
 c = int(input())
 for i in range(c):
-    # input idol members
-    idols = list(input())
+    # input idols M/W -> 1/0 converted
+    idols = list(map(int, input().replace("M", '1').replace("F", '0')))
     n_idols = len(idols)
-    # convert M -> 1 / F -> 0
-    for j in range(n_idols):
-        if idols[j] == 'M':
-            idols[j] = 1
-        else :
-            idols[j] = 0
     
-    # input fans
-    fans = list(input())
+    # input fans M/W -> 1/0 converted & reverse
+    fans = list(map(int, input().replace("M", '1').replace("F", '0')))
+    fans.reverse()
     n_fans = len(fans)
-    fans_rev = []
-    # convert M -> 1 / F -> 0 & reverse
-    for j in range(n_fans):
-        if fans[n_fans - j - 1] == 'M':
-            fans_rev.append(1)
-        else :
-            fans_rev.append(0)
     
     hugs = 0
 
-    # exception : idols are greater than fans
-    if n_idols > n_fans :
-        print(0)
-    else:
-        res = karatsuba(idols, fans_rev)
-        for j in range(n_idols - 1, n_fans):
-            if res[j] == 0:
-                hugs += 1
+    res = karatsuba(idols, fans)
+    for j in range(n_idols - 1, n_fans):
+        if res[j] == 0:
+            hugs += 1
     
     print(hugs)
 

@@ -1,9 +1,19 @@
+// Q: turn black-white picture(quad tree) upside down
+// b - if all pixels under are black
+// w - if all pixels under are white
+// x - if pixels are not one color
+
+// Idea : turn input into a quadtree
+//        then reverse the tree
+
 #include <iostream>
 
 using namespace std;
 
+// Quad Tree Class
 class QuadTree{
 public:
+    // takes input string into a tree object
     QuadTree(string &colors){
         color = colors[0];
         colors.erase(colors.begin());
@@ -19,9 +29,10 @@ public:
         }
     }
 
-    void reverse();
-    void print();
+    void reverse();         // reverse the tree
+    void print();           // prints the tree
 
+    // if subtree is used, free the space
     ~QuadTree(){
         if(color == 'x'){
             for(auto x : subtree){

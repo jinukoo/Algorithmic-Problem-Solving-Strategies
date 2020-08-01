@@ -1,3 +1,10 @@
+// Q : find how many ways you can pair by friends
+
+// Time Over
+
+// Idea : use next_permutation to find all possible ways
+//   	  from the friends list
+// 		  use set to check if all people are paired
 #include <iostream>
 #include <vector>
 #include <tuple>

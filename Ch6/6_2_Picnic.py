@@ -1,3 +1,5 @@
+# Q : find how many ways you can pair by friends
+
 # python code corresponding to the book algoritm
 
 # recursive function : finds one possibility

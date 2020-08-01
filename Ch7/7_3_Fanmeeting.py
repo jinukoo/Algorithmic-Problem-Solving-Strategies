@@ -4,6 +4,8 @@
 
 # Idea : Think hug as a multiplication of two big numbers
 
+# Runtime Error : infinite loop
+
 # represent big number as a list(index 0 : LSB)
 # No carry out needed!
 
@@ -49,7 +51,7 @@ def karatsuba(a, b):
     a1 = a[half:an]
     b0 = b[0:min(bn, half)]
     b1 = b[min(bn, half):bn]
-    
+
     # z2 = a1 * b1
     z2 = karatsuba(a1, b1)
     # z0 = a0 * b0

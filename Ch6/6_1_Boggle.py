@@ -1,22 +1,11 @@
-# take 5*5 input
-alphabets = []
-print("type in 5*5 letters:")
-for i in range(5):
-    line = input()
-    alphabets.append(line.split(' '))
+# Q : from 5*5 alphabet board find the given word from the board
 
-# check input
-# print("Your input is:")
-# for i in range(5):
-#     for j in range(5):
-#         print(alphabets[i][j], end=' ')
-#     print(" ")
+# Idea : By DFS, search all possible ways and check if answer is there
 
 
 # recursive function
+# return boolean wheter found the given word
 def hasWord(y, x, word):
-    # print(f"current place : {y}, {x} need to find {word}")
-    # print(f"current letter : {alphabets[y][x]}")
     # current letter corresponds
     if word[0] == alphabets[y][x]:
         # base case : found all word
@@ -46,5 +35,45 @@ def hasWord(y, x, word):
     # No match
     else:
         return False
+
+
+# find first letter
+# return list of locations
+def findFirst(ch):
+    location = []
+    for i in range(5):
+        for j in range(5):
+            if alphabets[i][j] == ch:
+                location.append([i, j])
+    return location
+
+
+# for each test cases
+c = int(input())
+for _ in range(c):
+    # take 5*5 input of alphabets
+    alphabets = []
+    for ___ in range(5):
+        alphabets.append(list(input()))
+    # n words to search
+    n = int(input())
+    for i in range(n):
+        existence = False
+        word = list(input())
+        locations = findFirst(word[0])
+        if len(locations) == 0 :
+            print("NO")
+        for j in range(len(locations)):
+            if hasWord(locations[j][0], locations[j][1], word):
+                existence = True
+                print("YES")
+                break
+        
+
+
+        
+
+
+
         
 print(hasWord(1,2,"REPEAT"))

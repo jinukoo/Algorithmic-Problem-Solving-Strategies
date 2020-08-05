@@ -32,3 +32,5 @@ Ch6/test.py
 *.out
 *.app
 
+# VsCode
+/.vscode/

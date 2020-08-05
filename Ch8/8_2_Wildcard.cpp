@@ -1,38 +1,52 @@
-// Q :
+// Q : given wildcard pattern, print all applicable input filenames in alphabetical order
+// * : can be any length of string(0 included)
+// ? : can be any char
+// pattern and filenames are composed of alphabets and numbers
+
+// Idea : full search algorithm
+//        how to handle '*' is the key problem
 
 // time over
 
 #include <iostream>
-#include <set>
+#include <algorithm>
+#include <vector>
 using namespace std;
 
 bool solve(string pattern, string filename);
 
 int main(){
+    // input test cases
     int c;
     cin >> c;
     while(c--){
+        // input wildcard pattern
         string pattern;
         cin >> pattern;
 
+        // input numbers of filenames
         int n;
         cin >> n;
 
-        set<string> s;
+        // vector to store applicable filenames
+        vector<string> v;
         while(n--){
             string filename;
             cin >> filename;
             if(solve(pattern, filename))
-                s.insert(filename);
+                v.push_back(filename);
         }
-
-        for(auto it = s.begin(); it != s.end(); it++){
+        // sort in alphabetical order and print them
+        sort(v.begin(), v.end());
+        for(auto it = v.begin(); it != v.end(); it++){
             cout << *it << endl;
         }
-        s.clear();
+        // clear for next test case
+        v.clear();
     }
 }
 
+// return true if filename is applicable for wildcard pattern
 bool solve(string pattern, string filename){
     bool res = true;
     int i = 0;

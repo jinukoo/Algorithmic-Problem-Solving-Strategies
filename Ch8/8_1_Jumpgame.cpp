@@ -1,56 +1,53 @@
+// Q : given a n*n board, you can either move right or down by the number in that block
+//     find wether you can reach bottom right from the top left corner.
+
+// Idea : Dynamic Programming and express each jump as a recursive function call
+
 #include <iostream>
-#include <vector>
 #include <algorithm>
 using namespace std;
 
-bool solve(int y, int x, int n);
+bool solve(int y, int x);
 
-vector<vector<int>> board;
-vector<vector<int>> cache;
+const int MAX = 100;
+
+int board[MAX][MAX];
+int cache[MAX][MAX];
+int n;
 
 int main(){
+    // input test cases
     int c;
     cin >> c;
     while(c--){
-        int n;
+        // input size of board
         cin >> n;
         
         // initialize board
-        int input;
         for(int i = 0; i < n; i++){
-            vector<int> temp;
             for(int j = 0; j < n; j++){
-                cin >> input;
-                temp.push_back(input);
+                cin >> board[i][j];
             }
-            board.push_back(temp);
         }
 
-        // initialize cache
-        vector<int> tmp(n);
-        fill(tmp.begin(), tmp.end(), -1);
-        for(int i = 0; i < n; i++){
-            cache.push_back(tmp);
-        }
+        // initialize cache to -1
+        fill(cache[0], &cache[MAX-1][MAX-1],-1);
 
-        if(solve(0, 0, n)) cout << "YES" << endl;
+        if(solve(0, 0)) cout << "YES" << endl;
         else cout << "NO" << endl;
-
-        // clear for next test case
-        board.clear();
-        cache.clear();
     }
 }
 
-bool solve(int y, int x, int n){
-    // base case
+// return true if corresponding location can reach bottom right
+bool solve(int y, int x){
+    // base case : reached end
     if(x == n - 1 && y == n - 1) return true;
 
     // use already calculated data
     if(cache[y][x] != -1) return bool(cache[y][x]);
 
     int move = board[y][x];
-    if((x + move < n && solve(y, x + move, n)) || (y + move < n && solve(y + move, x, n))){
+    if((x + move < n && solve(y, x + move)) || (y + move < n && solve(y + move, x))){
         cache[y][x] = 1;
         return true;
     }
@@ -59,3 +56,10 @@ bool solve(int y, int x, int n){
         return false;
     }
 }
+
+/* Improvements:
+1. if maximum is given, prefer array than vector -> board, cache
+    - no need to assign and free memory each time
+2. use common and constant parameter as a global variable -> n
+3. way of using fill to assign value to two dimensional array
+*/

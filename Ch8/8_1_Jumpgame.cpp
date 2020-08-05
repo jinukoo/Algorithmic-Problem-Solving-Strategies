@@ -2,6 +2,7 @@
 //     find wether you can reach bottom right from the top left corner.
 
 // Idea : Dynamic Programming and express each jump as a recursive function call
+// You can also solve the problem by full search algorithm
 
 #include <iostream>
 #include <algorithm>
